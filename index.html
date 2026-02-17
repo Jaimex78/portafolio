@@ -39,7 +39,7 @@
 
       <!-- DERECHA: FOTO -->
       <div class="hero-image-container">
-        <!-- RUTA CORREGIDA: assets/profile.jpg -->
+        <!-- RUTA EXACTA: assets/profile.jpg -->
         <img src="assets/profile.jpg" alt="Jaime Orozco Profile Photo">
       </div>
 
@@ -57,7 +57,7 @@
       </p>
     </section>
 
-    <!-- ================= EXPERIENCE ================= -->
+    <!-- ================= EXPERIENCE (MODIFICADO) ================= -->
     <section id="experience" class="section">
       <h2 class="section-title">Experience</h2>
 
@@ -66,7 +66,11 @@
         <!-- CARD 1 -->
         <article class="exp-card">
           <div class="exp-top">
-            <span class="exp-company">Ogilvy</span>
+            <!-- GRUPO: Nombre + Info -->
+            <div class="exp-group">
+              <span class="exp-company">Ogilvy</span>
+            </div>
+            <!-- TAG: Siempre a la derecha -->
             <span class="exp-tag">Current</span>
           </div>
           <p class="exp-role">Data (Analytics &amp; Ops)</p>
@@ -75,11 +79,13 @@
           </p>
         </article>
 
-        <!-- CARD 2: MEDBLUE (ARREGLADO MIAMI) -->
+        <!-- CARD 2 -->
         <article class="exp-card">
           <div class="exp-top">
-            <span class="exp-company">MedBlue</span>
-            <span class="exp-sub">Miami</span>  <!-- Estilo gris igual a Estonia -->
+            <div class="exp-group">
+              <span class="exp-company">MedBlue</span>
+              <span class="exp-sub">Miami</span>
+            </div>
             <span class="exp-tag">Current</span>
           </div>
           <p class="exp-role">Data Manager</p>
@@ -91,8 +97,10 @@
         <!-- CARD 3 -->
         <article class="exp-card">
           <div class="exp-top">
-            <span class="exp-company">Heidt Consulting OÜ</span>
-            <span class="exp-sub">Estonia</span>
+            <div class="exp-group">
+              <span class="exp-company">Heidt Consulting OÜ</span>
+              <span class="exp-sub">Estonia</span>
+            </div>
             <span class="exp-tag">Current</span>
           </div>
           <p class="exp-role">Data Expert</p>
