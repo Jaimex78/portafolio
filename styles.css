@@ -6,7 +6,7 @@
 :root{
 --bg: #f2f5f9;
 --card: rgba(255,255,255,0.9);
---card2: rgba(255,255,255,0.70);
+--card-hover: rgba(255,255,255,1);
 --border: rgba(0,0,0,0.06);
 
 --text: #0b0b0d;
@@ -14,16 +14,29 @@
 --muted2: rgba(17,17,19,0.48);
 
 --accent: #3b82f6;     
---accent-bg: #e0f2fe;  
+--accent-bg: #eff6ff;  
 
 --radius-xl: 28px;
 --radius-lg: 22px;
 
---shadow: 0 20px 40px rgba(0,0,0,0.08);
---shadow2: 0 30px 60px rgba(0,0,0,0.12);
+--shadow: 0 20px 40px rgba(0,0,0,0.06);
+--shadow-hover: 0 30px 60px rgba(0,0,0,0.12);
 
---blur: blur(20px);
 --container: 1150px;
+--anim-ease: cubic-bezier(0.2, 0.8, 0.2, 1); /* Suavizado Pro */
+}
+
+/* =========================
+ ANIMACIONES (KEYFRAMES)
+========================= */
+@keyframes fadeInUp {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInScale {
+from { opacity: 0; transform: scale(0.95); }
+to { opacity: 1; transform: scale(1); }
 }
 
 /* =========================
@@ -66,6 +79,9 @@ grid-template-columns: 1.2fr 0.8fr;
 align-items: center; 
 gap: 40px; padding: 50px;
 position: relative; overflow: hidden;
+
+/* Animación de entrada del Hero */
+animation: fadeInScale 0.8s var(--anim-ease) forwards;
 }
 
 .hero-card::before{
@@ -80,6 +96,17 @@ position: relative; z-index: 2;
 display: flex; flex-direction: column; justify-content: center;
 }
 
+/* Elementos del hero escalonados */
+.hero-content > * {
+opacity: 0;
+animation: fadeInUp 0.6s var(--anim-ease) forwards;
+}
+.hero-badge { animation-delay: 0.1s; }
+.hero-title { animation-delay: 0.2s; }
+.hero-role  { animation-delay: 0.3s; }
+.hero-sub   { animation-delay: 0.4s; }
+.hero-nav   { animation-delay: 0.5s; }
+
 .hero-image-container {
 position: relative; z-index: 2;
 width: 100%; height: 450px;
@@ -87,12 +114,19 @@ border-radius: var(--radius-lg);
 overflow: hidden;
 box-shadow: 0 15px 35px rgba(0,0,0,0.15);
 background-color: #000;
+opacity: 0;
+animation: fadeInScale 0.8s var(--anim-ease) 0.3s forwards; /* Retraso para la foto */
 }
 
 .hero-image-container img {
 width: 100%; height: 100%;
 object-fit: cover; object-position: center top;
 display: block;
+transition: transform 0.6s var(--anim-ease);
+}
+
+.hero-image-container:hover img {
+transform: scale(1.03);
 }
 
 .hero-badge{
@@ -130,24 +164,25 @@ background: #fff; border: 1px solid var(--border);
 color: var(--text); text-decoration:none;
 font-weight: 700; font-size: 0.9rem;
 box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-transition: all .2s ease;
+transition: all 0.3s var(--anim-ease);
 }
 
 .hero-nav a:hover{
-transform: translateY(-2px);
+transform: translateY(-3px);
 box-shadow: 0 8px 15px rgba(0,0,0,0.08);
 color: var(--accent);
+border-color: rgba(59,130,246,0.3);
 }
 
 /* =========================
- SECTIONS
+ SECTIONS & TITLES
 ========================= */
 main{ max-width: var(--container); margin: 0 auto; padding: 0 24px 80px; }
-.section{ margin-top: 70px; }
+.section{ margin-top: 80px; }
 
 .section-title{
 font-size: 2rem; font-weight: 900;
-letter-spacing: -0.03em; margin-bottom: 20px;
+letter-spacing: -0.03em; margin-bottom: 24px;
 display: inline-block; position: relative;
 }
 .section-title::after{
@@ -160,58 +195,58 @@ font-size: 1.05rem; max-width: 80ch; color: rgba(17,17,19,0.75);
 }
 
 /* =========================
- EXPERIENCE (ARREGLADO)
+ EXPERIENCE (NUEVO DISEÑO PRO)
 ========================= */
 .exp-grid{
 display: grid;
 grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-gap: 24px; margin-top: 24px;
+gap: 24px;
 }
 
 .exp-card{
 background: #fff; border: 1px solid var(--border);
-border-radius: var(--radius-xl); padding: 30px;
+border-radius: var(--radius-xl); padding: 32px;
 box-shadow: var(--shadow);
-transition: transform .3s ease, box-shadow .3s ease;
+transition: transform 0.4s var(--anim-ease), box-shadow 0.4s var(--anim-ease);
+position: relative;
+z-index: 1;
 }
 
-.exp-card:hover{ transform: translateY(-5px); box-shadow: var(--shadow2); }
-
-/* --- CORRECCIÓN DE LAYOUT --- */
-.exp-top{
-display: flex;
-justify-content: space-between; /* Texto a la izq, Tag a la derecha */
-align-items: flex-start; /* Alinea arriba */
-margin-bottom: 16px;
-gap: 12px;
+.exp-card:hover{ 
+transform: translateY(-8px); 
+box-shadow: var(--shadow-hover);
+z-index: 2;
 }
 
-/* Contenedor que agrupa Empresa + Ciudad */
-.exp-group {
+/* Layout vertical para Empresa/Ubicación */
+.exp-header{
 display: flex;
-flex-direction: row; 
-align-items: baseline; /* Alinea texto base */
-flex-wrap: wrap; /* Si es muy largo, baja el país, pero no el tag */
-gap: 8px;
+justify-content: space-between; /* Separa Texto de Tag */
+align-items: flex-start;
+margin-bottom: 20px;
+}
+
+.exp-info {
+display: flex;
+flex-direction: column; /* Apila Nombre y País */
 }
 
 .exp-company{
-font-weight: 900; font-size: 1.15rem; color: #000;
+font-weight: 900; font-size: 1.25rem; color: #000;
+line-height: 1.1; margin-bottom: 4px;
 }
 
-.exp-sub{
-font-weight: 500; color: #888; font-size: 1rem;
+.exp-location {
+font-weight: 600; font-size: 0.9rem; color: #9ca3af; /* Gris suave */
+text-transform: uppercase; letter-spacing: 0.05em;
 }
 
 .exp-tag{
-flex-shrink: 0; /* Impide que el tag se aplaste */
 background: var(--accent-bg); color: var(--accent);
 padding: 6px 12px; border-radius: 8px;
 font-weight: 800; font-size: 0.75rem;
 text-transform: uppercase; letter-spacing: 0.05em;
-white-space: nowrap; /* Impide que el texto del tag se rompa */
 }
-/* ----------------------------- */
 
 .exp-role{
 font-size: 1.05rem; font-weight: 800;
@@ -223,63 +258,98 @@ font-size: 0.95rem; color: rgba(0,0,0,0.65); line-height: 1.6;
 }
 
 /* =========================
- RESTO DE ESTILOS
+ CARDS (SERVICES)
 ========================= */
 .cards-grid{
 display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-gap: 24px; margin-top: 24px;
+gap: 24px;
 }
 .card{
 background: rgba(255,255,255,0.6); border: 1px solid var(--border);
-border-radius: var(--radius-lg); padding: 26px;
-backdrop-filter: blur(10px); transition: all .3s ease;
+border-radius: var(--radius-lg); padding: 28px;
+backdrop-filter: blur(10px); 
+transition: all 0.4s var(--anim-ease);
 }
 .card:hover{
-background: #fff; transform: translateY(-5px); box-shadow: var(--shadow);
+background: #fff; transform: translateY(-8px); box-shadow: var(--shadow-hover);
 }
-.card h3{ font-size: 1.15rem; font-weight: 900; margin-bottom: 10px; }
+.card h3{ font-size: 1.15rem; font-weight: 900; margin-bottom: 12px; }
 .card p{ font-size: 0.95rem; color: rgba(0,0,0,0.65); margin-bottom: 8px; }
 
-.work-list{ display: grid; gap: 24px; margin-top: 24px; }
+/* =========================
+ PROJECTS
+========================= */
+.work-list{ display: grid; gap: 24px; }
 .work-card{
 background: #fff; border-radius: var(--radius-lg);
-padding: 28px; border: 1px solid var(--border);
-box-shadow: var(--shadow); transition: transform .3s ease;
+padding: 30px; border: 1px solid var(--border);
+box-shadow: var(--shadow); 
+transition: transform 0.4s var(--anim-ease), box-shadow 0.4s var(--anim-ease);
 }
-.work-card:hover{ transform: translateY(-5px); }
-.work-card h3{ font-size: 1.25rem; font-weight: 900; margin-bottom: 8px; }
-.work-tags{ display: flex; gap: 8px; margin-top: 14px; }
+.work-card:hover{ transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+.work-card h3{ font-size: 1.3rem; font-weight: 900; margin-bottom: 10px; }
+.work-tags{ display: flex; gap: 8px; margin-top: 16px; }
 .work-tags span{
-font-size: 0.8rem; padding: 6px 12px; background: #f0f2f5;
-border-radius: 6px; font-weight: 700; color: #555;
+font-size: 0.8rem; padding: 6px 14px; background: #f3f4f6;
+border-radius: 8px; font-weight: 700; color: #555;
+transition: background 0.2s;
 }
+.work-tags span:hover { background: #e5e7eb; }
 
-.stack-block{ margin-top: 24px; }
+/* =========================
+ STACK
+========================= */
+.stack-block{ margin-top: 30px; }
 .stack-block h4{
-font-size: 0.9rem; text-transform: uppercase;
-color: #999; margin-bottom: 12px; font-weight: 800;
+font-size: 0.85rem; text-transform: uppercase;
+color: #999; margin-bottom: 14px; font-weight: 800; letter-spacing: 0.05em;
 }
 .chips{ display: flex; flex-wrap: wrap; gap: 10px; }
 .chips span{
-padding: 8px 18px; background: #fff;
+padding: 10px 20px; background: #fff;
 border: 1px solid rgba(0,0,0,0.08); border-radius: 999px;
 font-weight: 700; color: #444; font-size: 0.9rem;
 box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+transition: transform 0.2s var(--anim-ease), box-shadow 0.2s;
+cursor: default;
+}
+.chips span:hover{
+transform: translateY(-3px);
+box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+color: var(--accent);
 }
 
+/* =========================
+ CONTACT & FOOTER
+========================= */
 .contact-card{
-background: #fff; padding: 30px;
+background: #fff; padding: 36px;
 border-radius: var(--radius-lg); border: 1px solid var(--border);
-margin-top: 24px;
+margin-top: 24px; box-shadow: var(--shadow);
 }
-.contact-card p{ margin-bottom: 8px; font-size: 1.05rem; }
-.contact-card a{ color: var(--accent); text-decoration: none; font-weight: 700; }
+.contact-card p{ margin-bottom: 10px; font-size: 1.1rem; }
+.contact-card a{ 
+color: var(--accent); text-decoration: none; font-weight: 700;
+position: relative; 
+}
+.contact-card a::after {
+content: ''; position: absolute; width: 100%; height: 2px;
+bottom: -2px; left: 0; background-color: var(--accent);
+transform: scaleX(0); transform-origin: bottom right;
+transition: transform 0.3s ease-out;
+}
+.contact-card a:hover::after {
+transform: scaleX(1); transform-origin: bottom left;
+}
 
 .footer{
-text-align: center; padding: 40px; color: #999;
+text-align: center; padding: 60px 24px; color: #999;
 font-size: 0.9rem; font-weight: 600;
 }
 
+/* =========================
+ RESPONSIVE
+========================= */
 @media (max-width: 900px){
 .hero-card{
   grid-template-columns: 1fr; text-align: center;
