@@ -7,6 +7,10 @@
 </head>
 
 <body>
+  <!-- ELEMENTOS DEL CURSOR -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-outline"></div>
+
   <a class="skip-link" href="#main">Skip to content</a>
 
   <!-- ================= HERO ================= -->
@@ -15,8 +19,8 @@
       <div class="hero-content">
         <div class="hero-badge">ORZ · Data &amp; Automation</div>
 
-        <!-- DEGRADADO EN EL NOMBRE -->
-        <h1 class="hero-title">Jaime Orozco</h1>
+        <!-- TÍTULO CON EFECTO SPOTLIGHT -->
+        <h1 class="hero-title" id="spotlight-title">Jaime Orozco</h1>
 
         <p class="hero-role">
           Data Analyst <span class="dot">·</span> Data Entry &amp; Automation Expert
@@ -231,5 +235,51 @@
   <footer class="footer">
     <p>© 2026 Jaime Orozco — Data · Automation · Quality</p>
   </footer>
+
+  <!-- JAVASCRIPT: CURSOR + SPOTLIGHT -->
+  <script>
+    /* --- 1. CURSOR PERSONALIZADO --- */
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorOutline = document.querySelector('.cursor-outline');
+    const links = document.querySelectorAll('a, button, .chip-icon, .chips span');
+
+    window.addEventListener('mousemove', (e) => {
+      const posX = e.clientX;
+      const posY = e.clientY;
+
+      // Mueve el punto (instantáneo)
+      cursorDot.style.left = `${posX}px`;
+      cursorDot.style.top = `${posY}px`;
+
+      // Mueve el círculo (con retraso para efecto fluido)
+      cursorOutline.animate({
+        left: `${posX}px`,
+        top: `${posY}px`
+      }, { duration: 500, fill: "forwards" });
+    });
+
+    // Efecto Hover (Crecer el círculo)
+    links.forEach(link => {
+      link.addEventListener('mouseenter', () => {
+        document.body.classList.add('hovering');
+      });
+      link.addEventListener('mouseleave', () => {
+        document.body.classList.remove('hovering');
+      });
+    });
+
+    /* --- 2. SPOTLIGHT TITLE (DEGRADADO QUE SIGUE AL MOUSE) --- */
+    const title = document.getElementById('spotlight-title');
+
+    title.addEventListener('mousemove', (e) => {
+      const rect = title.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      // Enviamos la posición del mouse al CSS
+      title.style.setProperty('--x', `${x}px`);
+      title.style.setProperty('--y', `${y}px`);
+    });
+  </script>
 
 </body></html>
