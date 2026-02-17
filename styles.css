@@ -5,9 +5,8 @@
 
 :root{
 --bg: #f2f5f9;
---card: rgba(255,255,255,0.9);
---card-hover: rgba(255,255,255,1);
---border: rgba(0,0,0,0.06);
+--card: rgba(255,255,255,0.95);
+--border: rgba(0,0,0,0.08);
 
 --text: #0b0b0d;
 --muted: rgba(17,17,19,0.64);
@@ -145,33 +144,47 @@ font-size: 1.05rem; color: rgba(17,17,19,0.75);
 margin-bottom: 32px; max-width: 50ch; line-height: 1.6;
 }
 
-/* --- BOTONES DE ACCIÓN (NUEVO) --- */
+/* --- BOTONES DE ACCIÓN (CORREGIDO) --- */
 .hero-actions {
-display: flex; gap: 12px; margin-bottom: 36px;
+display: flex; 
+gap: 12px; 
+margin-bottom: 40px; /* Separación con el menú de abajo */
+align-items: center;
 }
 
 .btn-primary, .btn-secondary {
-display: inline-flex; align-items: center; justify-content: center;
-padding: 12px 28px; border-radius: 99px;
-font-weight: 700; text-decoration: none; font-size: 0.95rem;
-transition: transform 0.2s var(--anim-ease), box-shadow 0.2s;
+display: inline-flex; 
+align-items: center; 
+justify-content: center;
+padding: 12px 28px; 
+border-radius: 99px;
+font-weight: 700; 
+text-decoration: none !important; /* Fuerza quitar subrayado */
+font-size: 0.95rem;
+transition: transform 0.2s, box-shadow 0.2s;
+cursor: pointer;
 }
 
 .btn-primary {
-background: var(--text); color: #fff;
-box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+background: #111; /* Negro sólido para contraste */
+color: #fff !important;
+border: 1px solid transparent;
+box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 .btn-primary:hover {
 transform: translateY(-3px);
-box-shadow: 0 12px 24px rgba(0,0,0,0.25);
+box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+background: #000;
 }
 
 .btn-secondary {
-background: #fff; color: var(--text);
-border: 1px solid rgba(0,0,0,0.1);
+background: #fff; 
+color: var(--text) !important;
+border: 1px solid rgba(0,0,0,0.15);
 }
 .btn-secondary:hover {
-background: #f9fafb; transform: translateY(-3px);
+background: #f9fafb; 
+transform: translateY(-3px);
 box-shadow: 0 8px 16px rgba(0,0,0,0.05);
 }
 /* -------------------------------- */
@@ -187,10 +200,11 @@ transition: all 0.2s;
 .hero-nav a:hover{
 background: #fff; color: var(--text);
 box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+transform: translateY(-2px);
 }
 
 /* =========================
- SECTIONS & TITLES
+ SECTIONS
 ========================= */
 main{ max-width: var(--container); margin: 0 auto; padding: 0 24px 80px; }
 .section{ margin-top: 90px; }
@@ -204,59 +218,50 @@ display: inline-block; position: relative;
 content:""; display:block; width: 40px; height: 4px;
 border-radius: 2px; background: var(--accent); margin-top: 8px;
 }
-
 .section-text{ font-size: 1.05rem; max-width: 80ch; color: rgba(17,17,19,0.75); }
 
 /* =========================
- EXPERIENCE (VERTICAL)
+ EXPERIENCE
 ========================= */
 .exp-grid{
 display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 gap: 24px;
 }
-
 .exp-card{
 background: #fff; border: 1px solid var(--border);
 border-radius: var(--radius-xl); padding: 32px;
 box-shadow: var(--shadow);
 transition: transform 0.4s var(--anim-ease), box-shadow 0.4s var(--anim-ease);
-position: relative; z-index: 1;
 }
 .exp-card:hover{ 
-transform: translateY(-8px); box-shadow: var(--shadow-hover); z-index: 2;
+transform: translateY(-8px); box-shadow: var(--shadow-hover);
 }
-
 .exp-header{
 display: flex; justify-content: space-between; align-items: flex-start;
 margin-bottom: 20px;
 }
-
 .exp-info { display: flex; flex-direction: column; }
-
 .exp-company{
 font-weight: 900; font-size: 1.25rem; color: #000;
 line-height: 1.1; margin-bottom: 4px;
 }
-
 .exp-location {
 font-weight: 600; font-size: 0.85rem; color: #9ca3af;
 text-transform: uppercase; letter-spacing: 0.05em;
 }
-
 .exp-tag{
 background: var(--accent-bg); color: var(--accent);
 padding: 6px 12px; border-radius: 8px;
 font-weight: 800; font-size: 0.75rem;
 text-transform: uppercase; letter-spacing: 0.05em;
 }
-
 .exp-role{
 font-size: 1.05rem; font-weight: 800; color: rgba(0,0,0,0.8); margin-bottom: 12px;
 }
 .exp-desc{ font-size: 0.95rem; color: rgba(0,0,0,0.65); line-height: 1.6; }
 
 /* =========================
- CARDS (SERVICES)
+ CARDS & PROJECTS
 ========================= */
 .cards-grid{
 display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px;
@@ -272,9 +277,6 @@ background: #fff; transform: translateY(-8px); box-shadow: var(--shadow-hover);
 .card h3{ font-size: 1.15rem; font-weight: 900; margin-bottom: 12px; }
 .card p{ font-size: 0.95rem; color: rgba(0,0,0,0.65); margin-bottom: 8px; }
 
-/* =========================
- PROJECTS (METRICS)
-========================= */
 .work-list{ display: grid; gap: 24px; }
 .work-card{
 background: #fff; border-radius: var(--radius-lg);
@@ -282,10 +284,8 @@ padding: 30px; border: 1px solid var(--border);
 box-shadow: var(--shadow); transition: transform 0.4s var(--anim-ease);
 }
 .work-card:hover{ transform: translateY(-6px); }
-
 .work-card h3{ font-size: 1.3rem; font-weight: 900; margin-bottom: 10px; }
-.work-desc strong { color: var(--accent); font-weight: 800; } /* Resalta números */
-
+.work-desc strong { color: var(--accent); font-weight: 800; }
 .work-tags{ display: flex; gap: 8px; margin-top: 16px; }
 .work-tags span{
 font-size: 0.8rem; padding: 6px 14px; background: #f3f4f6;
@@ -293,7 +293,7 @@ border-radius: 8px; font-weight: 700; color: #555;
 }
 
 /* =========================
- STACK (ICONS)
+ STACK (ICONS CORREGIDOS)
 ========================= */
 .stack-block{ margin-top: 30px; }
 .stack-block h4{
@@ -303,21 +303,30 @@ color: #999; margin-bottom: 14px; font-weight: 800; letter-spacing: 0.05em;
 .chips{ display: flex; flex-wrap: wrap; gap: 12px; }
 
 .chips span{
-display: inline-flex; align-items: center; /* Centrar icono y texto */
-padding: 8px 20px; background: #fff;
-border: 1px solid rgba(0,0,0,0.08); border-radius: 999px;
+display: inline-flex; 
+align-items: center; /* Alinea icono con texto */
+padding: 8px 16px; 
+background: #fff;
+border: 1px solid rgba(0,0,0,0.1); 
+border-radius: 999px; /* Forma de píldora */
 font-weight: 700; color: #444; font-size: 0.9rem;
 box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 transition: transform 0.2s, box-shadow 0.2s;
-}
-.chips span:hover{
-transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+height: 42px; /* Altura fija para que sean uniformes */
 }
 
-/* Estilo para los iconos SVG dentro de los chips */
+.chips span:hover{
+transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+border-color: var(--accent);
+}
+
+/* TAMAÑO ESTRICTO DEL ICONO */
 .chip-icon {
-width: 18px; height: 18px; margin-right: 10px;
+width: 20px; 
+height: 20px; 
+margin-right: 10px;
 vertical-align: middle;
+object-fit: contain; /* Evita que se deforme */
 }
 
 /* =========================
@@ -330,8 +339,6 @@ margin-top: 24px; box-shadow: var(--shadow);
 }
 .contact-card p{ margin-bottom: 10px; font-size: 1.1rem; }
 .contact-card a{ color: var(--accent); text-decoration: none; font-weight: 700; }
-.contact-card a:hover { text-decoration: underline; }
-
 .footer{
 text-align: center; padding: 60px 24px; color: #999;
 font-size: 0.9rem; font-weight: 600;
@@ -352,5 +359,6 @@ font-size: 0.9rem; font-weight: 600;
 @media (max-width: 500px){
 .hero-title{ font-size: 2.5rem; }
 .hero-image-container{ height: 280px; width: 100%; }
-.hero-actions { flex-direction: column; } /* Botones uno encima de otro en móvil */
+.hero-actions { flex-direction: column; width: 100%; }
+.btn-primary, .btn-secondary { width: 100%; }
 }
