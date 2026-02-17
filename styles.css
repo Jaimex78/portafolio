@@ -1,3 +1,6 @@
+### 2. CSS Final (Igual que antes, solo aseguro que lo tengas)
+
+```css
 /* =========================
  RESET + TOKENS
 ========================= */
@@ -144,11 +147,11 @@ font-size: 1.05rem; color: rgba(17,17,19,0.75);
 margin-bottom: 32px; max-width: 50ch; line-height: 1.6;
 }
 
-/* --- BOTONES DE ACCIÓN (CORREGIDO) --- */
+/* --- BOTONES DE ACCIÓN --- */
 .hero-actions {
 display: flex; 
 gap: 12px; 
-margin-bottom: 40px; /* Separación con el menú de abajo */
+margin-bottom: 40px; 
 align-items: center;
 }
 
@@ -159,14 +162,14 @@ justify-content: center;
 padding: 12px 28px; 
 border-radius: 99px;
 font-weight: 700; 
-text-decoration: none !important; /* Fuerza quitar subrayado */
+text-decoration: none !important;
 font-size: 0.95rem;
 transition: transform 0.2s, box-shadow 0.2s;
 cursor: pointer;
 }
 
 .btn-primary {
-background: #111; /* Negro sólido para contraste */
+background: #111; 
 color: #fff !important;
 border: 1px solid transparent;
 box-shadow: 0 4px 12px rgba(0,0,0,0.2);
@@ -187,7 +190,6 @@ background: #f9fafb;
 transform: translateY(-3px);
 box-shadow: 0 8px 16px rgba(0,0,0,0.05);
 }
-/* -------------------------------- */
 
 .hero-nav{ display:flex; gap: 10px; flex-wrap: wrap; }
 .hero-nav a{
@@ -293,7 +295,7 @@ border-radius: 8px; font-weight: 700; color: #555;
 }
 
 /* =========================
- STACK (ICONS CORREGIDOS)
+ STACK (ICONOS)
 ========================= */
 .stack-block{ margin-top: 30px; }
 .stack-block h4{
@@ -304,15 +306,15 @@ color: #999; margin-bottom: 14px; font-weight: 800; letter-spacing: 0.05em;
 
 .chips span{
 display: inline-flex; 
-align-items: center; /* Alinea icono con texto */
+align-items: center;
 padding: 8px 16px; 
 background: #fff;
 border: 1px solid rgba(0,0,0,0.1); 
-border-radius: 999px; /* Forma de píldora */
+border-radius: 999px;
 font-weight: 700; color: #444; font-size: 0.9rem;
 box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 transition: transform 0.2s, box-shadow 0.2s;
-height: 42px; /* Altura fija para que sean uniformes */
+height: 42px;
 }
 
 .chips span:hover{
@@ -320,13 +322,12 @@ transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.08);
 border-color: var(--accent);
 }
 
-/* TAMAÑO ESTRICTO DEL ICONO */
 .chip-icon {
 width: 20px; 
 height: 20px; 
 margin-right: 10px;
 vertical-align: middle;
-object-fit: contain; /* Evita que se deforme */
+object-fit: contain;
 }
 
 /* =========================
